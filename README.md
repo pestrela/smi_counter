@@ -8,7 +8,7 @@ https://en.wikipedia.org/wiki/System_Management_Mode
 
 ## Download
 
-[windows_count_smi.sh]
+[windows_count_smi.sh](windows_count_smi.sh)
 
 
 ## Pre-requisites:
