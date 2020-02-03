@@ -1,9 +1,10 @@
 # Windows SMI counter
 
-This program displays the count of SMI interrupts in Windows. It is a wrapper to the windows kernel debugger.
-This program also saves a log file to show average events per hour.
+This program displays the count of SMI interrupts in Windows.\
+It is a wrapper to the windows kernel debugger.\
+It also saves a log file with the average SMI events per hour.
 
-SMI are System Management Interrupts of Intel CPUS that that the BIOS uses to perform special operations 
+SMI ("System Management Interrupts") can be issued by the BIOS at any time to stop the whole computer (including the whole OS) todo special operations.
 https://en.wikipedia.org/wiki/System_Management_Mode
 
 ## Download
