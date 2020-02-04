@@ -39,7 +39,7 @@ https://en.wikipedia.org/wiki/System_Management_Mode
 ## a) BIOS 0.18.0 SMI problems
 [Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967)
   
-![dell_smi_heavy_problems](dell_smi_heavy_pDroblems.jpg?raw=true "Dell SMI")
+![dell_smi_heavy_problems](dell_smi_heavy_problems.jpg?raw=true "Dell SMI")
 
 ## b) Changing Brightness
 
