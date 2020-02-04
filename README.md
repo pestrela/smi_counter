@@ -1,10 +1,7 @@
 # Windows SMI counter
 
-This program displays the count of SMI interrupts in Windows.\
-It is a wrapper to the windows kernel debugger.\
-It also saves a log file with the average SMI events per hour.
-
-SMI ("System Management Interrupts") can be issued by the BIOS at any time to stop the whole computer (including the whole OS) todo special operations.
+This is a wrapper for the Kernel Debugger to count SMI interrupts.\
+SMIs are special interrupts issued by the BIOS at any time todo special operations. This locks the whole computer including all cores and the whole OS.
 https://en.wikipedia.org/wiki/System_Management_Mode
 
 ## Download
@@ -36,14 +33,14 @@ https://en.wikipedia.org/wiki/System_Management_Mode
   * https://www.resplendence.com/latencymon_idlt
   * https://www.resplendence.com/latencymon_cpustalls
    
-# SMI Measurements results
+# Results
 
-## BIOS problems
+## a) BIOS 0.18.0 SMI problems
 [Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967)
   
 ![dell_smi_heavy_problems](dell_smi_heavy_problems.jpg?raw=true "Dell SMI")
 
-## Changing Brightness
+## b) Changing Brightness
 
 ![SMI measurer control](dell_smi_counter.jpg?raw=true "Dell SMI")
 

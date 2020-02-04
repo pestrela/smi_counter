@@ -8,8 +8,11 @@ function display_help()
 {
   echo "
   
-Displays the count of SMI (System Management Interrupts) / SMM (System Management Mode) in Windows.
-It also saves a log file to show average events per hour.
+This program displays the count of SMI interrupts in Windows. It is a wrapper to the windows kernel debugger.
+This program also saves a log file to show average events per hour.
+
+SMI are System Management Interrupts, part of the SMM (System Management Mode) of the CPU to support the BIOS operations.
+https://en.wikipedia.org/wiki/System_Management_Mode
   
   
 Pre-requisites:
