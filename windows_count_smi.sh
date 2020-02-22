@@ -3,51 +3,102 @@
 
 set -u
 set -e
- 
-function display_help()
+
+
+function display_help_short()
 {
   echo "
   
-This program displays the count of SMI interrupts in Windows. It is a wrapper to the windows kernel debugger.
-This program also saves a log file to show average events per hour.
+Displays the count of SMI (System Management Interrupts) / SMM (System Management Mode) in Windows.
+It also saves a log file to show average events per hour.
 
-SMI are System Management Interrupts, part of the SMM (System Management Mode) of the CPU to support the BIOS operations.
-https://en.wikipedia.org/wiki/System_Management_Mode
+Options:
+ -g: show log file
+ -h: display help
+ -H: installation / tutorials
+ 
+Stats:    
+ -s: minimum events to save file
+ -S: minimum events to show to screen
+ -m: Show passage of time (minutes) with a dot
+ 
+ 
+ IMPORTANT: use -H for installation and tutorial help!
+ 
+"
   
-  
-Pre-requisites:
+ 
+}
+
+ 
+function display_help_full()
+{
+  display_help_short
+
+  echo "
+    
+a) Pre-requisites:
   - WSL
   - Windows Kernel Debugger:
     - install windows SDK, select ONLY 'Debugging Tools for Windows'
     - https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
   
-To install this script:
+  
+b) To INSTALL this script:
   - Disable secure boot in BIOS
   - Enable debug in windows kernel  (bcdedit.exe -debug on)
     - https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
   - Reboot
-     
-To measure SMI LATENCY impact:
+  
+  
+c) To measure SMI LATENCY impact:
   - Run IDTL (In Depth Latency Tests) with HIGH_LEVEL IRQL
   - https://www.resplendence.com/latencymon_idlt
   - https://www.resplendence.com/latencymon_cpustalls
+  - Windows performance analyser tutorial:  https://www.sysnative.com/forums/threads/how-to-diagnose-and-fix-high-dpc-latency-issues-with-wpa-windows-vista-7-8.5721/ 
+    - if you get error 0x80071069: get more free disk space
+ 
+ 
+d) About the Intel register that counts SMIs:
+  - MSR register info:
+    - https://stackoverflow.com/questions/50790715/is-there-a-way-to-determine-that-smm-interrupt-has-occured/
+    - See chapter 34 of https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3c-part-3-manual.pdf
+ 
+  - How-to read the MSR in windows:
+    - rdmsr: https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/rdmsr--read-msr-
+    - Old info about PI: https://kevinwlocke.com/bits/2017/03/27/checking-msrs-for-x2apic-in-windows/
+     
+ 
+e) Disabling windows Telemetry
+  - main article: https://www.neweggbusiness.com/smartbuyer/windows/should-you-disable-windows-10-telemetry/
+    - python program: https://github.com/10se1ucgo/DisableWinTracking
+    - other program: https://www.reddit.com/r/computertechs/comments/3kn4cf/mtrt_microsoft_telemetry_removal_tool_v10/
+    - group policies list: https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#BKMK_WiFiSense
+    - ultimate windows tweaker - security and privacy tab
+     
+ - to install group policy on windows 10 home:
+   - microsoft: https://www.itechtics.com/enable-gpedit-windows-10-home/  / powershell script / then gpedit.msc 
+   - open source: https://github.com/Fleex255/PolicyPlus#download
    
-Intel register:
-  - https://stackoverflow.com/questions/50790715/is-there-a-way-to-determine-that-smm-interrupt-has-occured/
-  - See chapter 34 of https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3c-part-3-manual.pdf
  
-Tools to read MSR in windows:
-  - rdmsr: https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/rdmsr--read-msr-
-  - Old info about PI: https://kevinwlocke.com/bits/2017/03/27/checking-msrs-for-x2apic-in-windows/
- 
-How to find the BIOS update history in Dell:
+e) How to find the BIOS update history in Dell:
   - Dell update logs: C:\ProgramData\Dell\UpdateService\Log  
   - Activity.log:
     - log format: https://www.dell.com/support/manuals/ie/en/iebsdt1/dell-command-update-v2.3/dcu_ug_2.3/activity-log?guid=guid-31fdd315-57c4-48d5-9847-a3f9f1dd86d7&lang=en-us
-    - iconv -f UTF-16LE -t UTF-8 ../Activity.log  -o - | tr [:upper:] [:lower:] | awk '/timestamp/{a=$0} /installing/{ print a, $0; }' |  sed -e 's/<[^>]*>/ /g;s/t/ /;s/\./ /' | dos2unix > activity.txt
+    - iconv -f UTF-16LE -t UTF-8 ./Activity.log  -o - | tr [:upper:] [:lower:] | awk '/timestamp/{a=$0} /installing/{ print a, $0; }' |  sed -e 's/<[^>]*>/ /g;s/t/ /;s/\./ /' | dos2unix > activity.txt
     - cat activity.txt | grep -i installing 
   - service.log:
-    - cat service.6.log | grep -i installing
+    - cat Service.log | grep -i installing
+
+    
+f) How to find the Dell Supportassist log:
+  - log: C:\ProgramData\Dell\SARemediation\log
+  - cat DellSupportAssistRemedationService.log | egrep -i '\*process|audio'
+    - this service makes a full PCI inventory every 30minutes (!)
+  - tickets:
+    - dell ticket:  https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-worse/m-p/7477967/highlight/false#M48840
+    - 9560 owners thread:  http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303
+    - 9570 owners thread: http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292
   
 "
 
@@ -102,7 +153,7 @@ function get_smi_count()
   to_exec="${kernel_debugger_dir}/${kernel_debugger_file}"
 
   RET=0
-  output="$( "${to_exec}" -kl -c "RDMSR 0x34;q" )" || RET=$?
+  output="$(  "${to_exec}" -kl -c "RDMSR 0x34;q" 2>&1 )" || RET=$?
   
   if [ $RET -ge 1 ]; then
     echo "$output"
@@ -112,6 +163,7 @@ function get_smi_count()
     die "ERROR: Cannot call KD. Please confirm this WSL terminal has windows administrator priviledges (ie, not sudo!), and kernel is enabled for debugging"
   fi
   
+  #time="$( echo "$output" | grep "msr\[34\]"  | sed 's/`/ /' | awk --non-decimal-data '{ printf("%d", "0x"$NF ); }' )"
   counter="$( echo "$output" | grep "msr\[34\]"  | sed 's/`/ /' | awk --non-decimal-data '{ printf("%d", "0x"$NF ); }' )"
   
   get_date
@@ -142,27 +194,48 @@ function convert_human_date_full()
   echo "$human_date"
 }
  
+ 
+function show_last_log()
+{
+  $0 -g | tail -n 5
+
+} 
 
 function start_program()
 {
   global start_time
   
+  
+  
+  
+  min_passage_time_seconds="$(( 60 * min_passage_time_minutes ))"
+
   get_date
   start_time="$now"
   last_refresh="$now"
   
+  if [ "$min_to_report_screen" -gt "$min_to_report_stats" ]; then
+    die "Min_screen is bigger than Min_stats"
+  fi
+  
+  
   echo ""
   echo "SMI WSL counter"
-  echo "started at: $( convert_human_date $start_time )"
-  echo "will append stats to: $stats_file"
-  
-  echo "config:"
-  echo "min_to_report_screen: $min_to_report_screen"
-  echo "min_to_stats: $min_to_stats"
-  echo "min_passage_time_minutes: $min_passage_time_minutes"
+  echo "  started at: $( convert_human_date $start_time )"
+  echo "  will append stats to: $stats_file"
+
+  echo ""  
+  echo "Config:"
+  echo "  min_to_report_screen:     $min_to_report_screen"
+  echo "  min_to_report_stats:      $min_to_report_stats"
+  echo "  min_passage_time_minutes: $min_passage_time_minutes"
 
   echo ""
-  echo "Use 'q' to quit"
+  echo "Last log:"
+  show_last_log
+  
+  echo ""
+  echo "Running, use 'q' to quit:"
   echo ""
   
   dump_stats_start 
@@ -190,12 +263,20 @@ function end_program()
   exit 0
 }
 
+function log_screen()
+{
+  global now delta
+
+  echo "$( convert_human_date $now ): $@"
+}
+
+
 function dump_human_smi()
 {
-  global now  delta
+  global now delta
   
-  echo "$( convert_human_date $now ): $delta SMI events seen this second "
-
+  log_screen "$delta SMI events seen this second"
+ 
 }
 
 function dump_stats_stop()
@@ -269,13 +350,12 @@ function show_passage_of_time()
   #echo "$time_elapsed $now $last_refresh"
   
   if [ "$time_elapsed" -ge "$min_passage_time_seconds" ]; then
-    echo -n "."
+    #echo -n "."
+    log_screen "."
   
     last_refresh="$now"
   fi
   
-  #sleep "$sleep_time"
-
 }
 
 
@@ -283,25 +363,70 @@ stats_file="$HOME/windows_home/smi_count.stats"
 
 last_counter=0
 counter=0
-sleep_time="0.3"
-sleep_time="0.1"
+sleep_time="0.1"            # not used!
 min_to_report_screen=10
-min_to_stats=50
-#min_to_stats=1
+min_to_report_screen=1
+min_to_report_stats=50
 
 min_passage_time_minutes=5
-min_passage_time_minutes2=60
-#min_passage_time_minutes=60
-min_passage_time_seconds="$(( 60 * min_passage_time_minutes ))"
 
 get_smi_count
 last_counter="$counter"
+test_description="none"
+has_test_description=0
 
-if [ $# -ge 1 ]; then
-  test_description="$1"
+while [ "$#" -ge 1 ]; do
+  case "$1" in
+  -h|--help)
+    display_help_short
+    exit 0
+    ;;
+    
+  -d)
+    set -x
+    ;;
+    
+  -H|--full_help)
+    display_help_full
+    exit 0
+    ;;
+    
+  -s)
+    min_to_report_stats="$2"
+    shift
+    ;;
+    
+  -S)
+    min_to_report_screen="$2"
+    shift
+    ;;
+    
+  -m)
+    min_passage_time_minutes="$2"
+    shift
+    ;;
+    
   
-else
-
+    
+  -g)
+    cat "$stats_file" | grep SMI | sed 's/T/ /'
+    exit 0
+    ;;
+    
+  -*)
+    die "unknown option"
+    ;;
+    
+  *)
+    test_description="$1"
+    has_test_description=1
+    ;;
+  esac
+  
+  shift 1
+done
+ 
+if [ $has_test_description -eq 0 ]; then
   read -p "Please input your test description:  " test_description
   
 fi
@@ -318,7 +443,7 @@ while true ; do
     dump_human_smi
   fi
 
-  if [ $delta -ge $min_to_stats ]; then
+  if [ $delta -ge $min_to_report_stats ]; then
     dump_stats_smi
   fi
 
