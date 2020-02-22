@@ -45,17 +45,17 @@ It is perfectly correlated with DellSupportAssistRemedationService that does a f
 
 **windows_count_smi log:**
 
-2020-02-22 13:19:28,504033800+00:00 1582377568.504033800 SMI 192
-2020-02-22 13:49:29,709938000+00:00 1582379369.709938000 SMI 192
-2020-02-22 14:19:31,464194900+00:00 1582381171.464194900 SMI 192
-2020-02-22 14:49:32,292745300+00:00 1582382972.292745300 SMI 192
+* 2020-02-22 13:19:28,504033800+00:00 1582377568.504033800 SMI 192
+* 2020-02-22 13:49:29,709938000+00:00 1582379369.709938000 SMI 192
+* 2020-02-22 14:19:31,464194900+00:00 1582381171.464194900 SMI 192
+* 2020-02-22 14:49:32,292745300+00:00 1582382972.292745300 SMI 192
 
 **DellSupportAssistRemedationService.log**
 
-20-02-22 13:19:26,938 [4] [ERROR] Failed to detect audio playing. #StackInfo#
-20-02-22 13:49:28,208 [4] [ERROR] Failed to detect audio playing. #StackInfo#
-20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
-20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
+* 20-02-22 13:19:26,938 [4] [ERROR] Failed to detect audio playing. #StackInfo#
+* 20-02-22 13:49:28,208 [4] [ERROR] Failed to detect audio playing. #StackInfo#
+* 20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
+* 20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 
 
 
