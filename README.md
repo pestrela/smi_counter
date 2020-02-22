@@ -37,11 +37,12 @@ https://en.wikipedia.org/wiki/System_Management_Mode
 # Results
 
 
-## **0) UPDATE:** the SMIs latency problem returned even on BIOS 0.12.1. It happens every 30minutes,
+## 0) UPDATE:
+
+**the SMIs latency problem returned even on BIOS 0.12.1. It happens every 30minutes,
 
 It is perfectly correlated with DellSupportAssistRemedationService that does a full PCI inventory every 30m. Disabling this service avoids the problem (again!). 
 
-----
 
 **windows_count_smi log:**
 
