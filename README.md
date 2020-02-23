@@ -33,45 +33,43 @@ https://en.wikipedia.org/wiki/System_Management_Mode
   * https://www.resplendence.com/latencymon_idlt
   * https://www.resplendence.com/latencymon_cpustalls
    
-
+Note: run "windows_count_smi.sh -H" for more help text and links.
+   
 # Results
 
 
 ## 0) UPDATE:
 
-**the SMIs latency problem returned even on BIOS 0.12.1. It happens every 30minutes,
+**IMPORTANT:**: the SMIs latency problem are caused by the "Dell Support Assist Remedation Service" doing a **deep PCI inventory scan** every **30 minutes**.\
+This was tracked on the latest BIOS 0.18.0 and all the latest dell updates installed (date: 23 Feb 2020)
 
-It is perfectly correlated with DellSupportAssistRemedationService that does a full PCI inventory every 30m. Disabling this service avoids the problem (again!). 
 
+Disabling this service in services.msc avoids the issue. 
+Lowering the priority of the service has no effect, because priority is a "ring +3" concept while the triggered SMIs are a "ring -2" concept.
 
 **windows_count_smi log:**
-
 * 2020-02-22 13:19:28,504033800+00:00 1582377568.504033800 SMI 192
 * 2020-02-22 13:49:29,709938000+00:00 1582379369.709938000 SMI 192
 * 2020-02-22 14:19:31,464194900+00:00 1582381171.464194900 SMI 192
 * 2020-02-22 14:49:32,292745300+00:00 1582382972.292745300 SMI 192
 
-**DellSupportAssistRemedationService.log**
-
+**C:\ProgramData\Dell\SARemediation\log\DellSupportAssistRemedationService.log**
 * 20-02-22 13:19:26,938 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 13:49:28,208 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 
-
-
-## a) BIOS 0.18.0 SMI problems
 [Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967)
+
+
+
+## Ring -2 Concept 
   
-![dell_smi_heavy_problems](dell_smi_heavy_problems.jpg?raw=true "Dell SMI")
+![dell_support_assist1](dell_support_assist1.jpg?raw=true "Dell SMI")
 
-## b) Changing Brightness
+## WPA (windows performance analyser)
 
-![SMI measurer control](dell_smi_counter.jpg?raw=true "Dell SMI")
+![dell_support_assist2](dell_support_assist2.jpg?raw=true "Dell SMI")
 
 
 
-   
-    
-
-    
