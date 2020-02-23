@@ -43,9 +43,9 @@ Note: run "windows_count_smi.sh -H" for more help text and links.
 **IMPORTANT:**: the SMIs latency problem are caused by the "Dell Support Assist Remedation Service" doing a **deep PCI inventory scan** every **30 minutes**.\
 This was tracked on the latest BIOS 0.18.0 and all the latest dell updates installed (date: 23 Feb 2020)
 
-
-Disabling this service in services.msc avoids the issue. 
-Lowering the priority of the service has no effect, because priority is a "ring +3" concept while the triggered SMIs are a "ring -2" concept.
+Fixes:
+* Disabling this service in services.msc avoids the issue.\
+* Lowering the priority of the service has no effect, because priority is a "ring +3" concept while the triggered SMIs are a "ring -2" concept.
 
 **windows_count_smi log:**
 * 2020-02-22 13:19:28,504033800+00:00 1582377568.504033800 SMI 192
