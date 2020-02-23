@@ -59,9 +59,14 @@ Fixes:
 * 20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 
-[Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967)
 
+## Tickets
 
+* [Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967/)
+* [9560 owners thread](http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303/)
+* [9570 owners thread](http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292/)
+* [reddit](https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/)
+    
 
 ## Ring -2 Concept 
   
