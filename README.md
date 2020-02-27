@@ -40,12 +40,28 @@ Note: run "windows_count_smi.sh -H" for more help text and links.
 
 ## 0) UPDATE:
 
-**IMPORTANT:**: the SMIs latency problem are caused by the "Dell Support Assist Remedation Service" doing a **deep PCI inventory scan** every **30 minutes**.\
-This was tracked on the latest BIOS 0.18.0 and all the latest dell updates installed (date: 23 Feb 2020)
 
-Fixes:
-* Disabling this service in services.msc avoids the issue.\
+Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
+ 
+ 
+**Issue:**
+* the Dell SupportAssist service does a **deep PIC scan** for inventory purposes every 30 minutes. 
+* This causes 192x ring-2 SMI interrupts that lock the laptop for whole seconds. SMIs run below the kernel and a possible hypervisor.
+* This Dell service was already preinstalled in  my XPS 15-9560 laptop
+
+
+**Environment:**
+* Dell XPS 15-9560
+* BIOS: 1.18.0, 1.16.0 and 1.12.1 were tested
+* SupportAssist: 5.0.1.10874
+* Windows 10 home: 18363
+* All latest drivers and services from Dell ([link](https://www.dell.com/support/home/ie/en/iedhs1/product-support/product/xps-15-9560-laptop/drivers))
+
+
+**Fixes:**
 * Lowering the priority of the service has no effect, because priority is a "ring +3" concept while the triggered SMIs are a "ring -2" concept.
+* Disabling this service in services.msc avoids the issue.
+
 
 **windows_count_smi log:**
 * 2020-02-22 13:19:28,504033800+00:00 1582377568.504033800 SMI 192
@@ -59,12 +75,35 @@ Fixes:
 * 20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 
+## UPDATE2:
+
+* Some other of the Dell services causes 42x SMIs every 15 minutes
+  * **Recommendation:** disable all Dell services to avoid SMIs
+* If you install the DellSupportAssist GUI, you can configure a weekly hardware scan
+  * However I havent seen any difference on the 192x and 42x SMI problems
+
+
+**windows_count_smi log:***
+2020-02-27 10:38:44,527207400+01:00 1582796324.527207400 SMI 42
+2020-02-27 10:53:44,372286700+01:00 1582797224.372286700 SMI 42
+2020-02-27 11:08:45,207355200+01:00 1582798125.207355200 SMI 42
+2020-02-27 11:23:44,360058300+01:00 1582799024.360058300 SMI 42
+2020-02-27 11:38:44,490156400+01:00 1582799924.490156400 SMI 42
+
+
+![dell_services.jpg](dell_services.jpg?raw=true "Dell Services")
+
+------------------------
+
+------------------------
+
 
 ## Tickets
 
-* [Dell Ticket](https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-not/td-p/7477967/)
+* [Dell Ticket](https://www.dell.com/community/XPS/Dell-SupportAssist-causes-SECONDS-of-latency-every-30m-XPS-15/m-p/7501047)
+* [Dell Drivers](https://www.dell.com/support/home/ie/en/iedhs1/product-support/product/xps-15-9560-laptop/drivers)
 * [9560 owners thread](http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303/)
-* [9570 owners thread](http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292/)
+* [9570 owners thread](http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292)
 * [reddit](https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/)
     
 

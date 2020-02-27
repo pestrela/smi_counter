@@ -99,7 +99,7 @@ f) How to find the Dell Supportassist log:
     - dell ticket:  https://www.dell.com/community/XPS/Dell-XPS-15-9560-BIOS-0-18-0-causes-SECONDS-of-SMI-latency-worse/m-p/7477967/highlight/false#M48840
     - 9560 owners thread:  http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303
     - 9570 owners thread: http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292
-  
+    - reddit: https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/
 "
 
 }
@@ -366,7 +366,7 @@ counter=0
 sleep_time="0.1"            # not used!
 min_to_report_screen=10
 min_to_report_screen=1
-min_to_report_stats=50
+min_to_report_stats=30
 
 min_passage_time_minutes=5
 
@@ -461,4 +461,19 @@ while true ; do
 done
 
 end_program
+ 
+ 
+exit 0
+
+
+13:52:05.061906500: 42 SMI events seen this second
+14:07:05.002522400: 42 SMI events seen this second
+14:22:05.829169000: 42 SMI events seen this second
+14:37:05.991508000: 42 SMI events seen this second
+14:45:27.461490100: 194 SMI events seen this second
+14:52:04.874453000: 42 SMI events seen this second
+15:07:04.724955500: 42 SMI events seen this second
+
+
+ 
  
