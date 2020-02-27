@@ -37,9 +37,12 @@ Note: run "windows_count_smi.sh -H" for more help text and links.
    
 # Results
 
+## Example audio glitch
+
+here: [example_audio_glitch.mp3](example_audio_glitch.mp3)
+
 
 ## 0) UPDATE:
-
 
 Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
  
