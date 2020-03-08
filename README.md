@@ -37,15 +37,14 @@ Note: run "windows_count_smi.sh -H" for more help text and links.
    
 # Results
 
-## Example audio glitch
+## Example of an audio glitch
 
-here: [example_audio_glitch.mp3](example_audio_glitch.mp3)\
-[alternative link](https://www.dropbox.com/s/16fa74u45qw846y/example_audio_glitch.mp3?dl=0)
+here: [example_audio_glitch.mp3](example_audio_glitch.mp3) / [alternative link](https://www.dropbox.com/s/16fa74u45qw846y/example_audio_glitch.mp3?dl=0)
 
 
-## 0) UPDATE:
+## a) Dell SupportAssist problems
 
-Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
+The service "Dell SupportAssist" causes SECONDS of latency every 30 minutes (XPS 15-9560/BIOS 1.18.0)
  
  
 **Issue:**
@@ -63,8 +62,8 @@ Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
 
 
 **Fixes:**
-* Lowering the priority of the service has no effect, because priority is a "ring +3" concept while the triggered SMIs are a "ring -2" concept.
-* Disabling this service in services.msc avoids the issue.
+* **Services**: Disabling this service in **services.msc** avoids the issue completely.
+* **Lower Priority:** no effect at all (see "ring -2" concept, below)
 
 
 **windows_count_smi log:**
@@ -79,27 +78,21 @@ Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
 * 20-02-22 14:19:29,470 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 * 20-02-22 14:49:30,732 [4] [ERROR] Failed to detect audio playing. #StackInfo#
 
-## UPDATE2:
+## b) Other Dell services problems
 
 * Some other of the Dell services causes 42x SMIs every 15 minutes
   * **Recommendation:** disable all Dell services to avoid SMIs
 * If you install the DellSupportAssist GUI, you can configure a weekly hardware scan
-  * However I havent seen any difference on the 192x and 42x SMI problems
+  * However I haven't seen any difference on the 192x and 42x SMI problems
 
 
-**windows_count_smi log:***
+**windows_count_smi log:**
 * 2020-02-27 10:38:44,527207400+01:00 1582796324.527207400 SMI 42
 * 2020-02-27 10:53:44,372286700+01:00 1582797224.372286700 SMI 42
 * 2020-02-27 11:08:45,207355200+01:00 1582798125.207355200 SMI 42
 * 2020-02-27 11:23:44,360058300+01:00 1582799024.360058300 SMI 42
 * 2020-02-27 11:38:44,490156400+01:00 1582799924.490156400 SMI 42
 
-
-![dell_services.jpg](dell_services.jpg?raw=true "Dell Services")
-
-------------------------
-
-------------------------
 
 
 ## Tickets
@@ -109,8 +102,13 @@ Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
 * [9560 owners thread](http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303/)
 * [9570 owners thread](http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292)
 * [reddit](https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/)
-    
 
+
+------------------------
+------------------------
+    
+# Summary Slides
+    
 ## Ring -2 Concept 
   
 ![dell_support_assist1](dell_support_assist1.jpg?raw=true "Dell SMI")
@@ -118,6 +116,10 @@ Dell SupportAssist causes SECONDS of latency every 30m (XPS 15-9560/BIOS 1.18.0)
 ## WPA (windows performance analyser)
 
 ![dell_support_assist2](dell_support_assist2.jpg?raw=true "Dell SMI")
+
+## Services to disable
+
+![dell_support_assist3](dell_support_assist3.jpg?raw=true "Dell SMI")
 
 
 
