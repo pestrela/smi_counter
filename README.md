@@ -41,6 +41,14 @@ Note: run "windows_count_smi.sh -H" for more help text and links.
 
 here: [example_audio_glitch.mp3](example_audio_glitch.mp3) / [alternative link](https://www.dropbox.com/s/16fa74u45qw846y/example_audio_glitch.mp3?dl=0)
 
+## 0) UPDATE
+
+* Previously I recommended to disable the services. 
+  * This is not enough. Something reactivated the services some week(s) later.
+* **New recommendation:** Un-Install **all** Dell sofware with has "support" in the title.
+
+![dell_support_assist3](dell_support_assist3.jpg?raw=true "Dell SMI")
+
 
 ## a) Dell SupportAssist problems
 
@@ -56,13 +64,14 @@ The service "Dell SupportAssist" causes SECONDS of latency every 30 minutes (XPS
 **Environment:**
 * Dell XPS 15-9560
 * BIOS: 1.18.0, 1.16.0 and 1.12.1 were tested
-* SupportAssist: 5.0.1.10874
+* SupportAssist: 3.4.1 + 5.0.1.10874
 * Windows 10 home: 18363
 * All latest drivers and services from Dell ([link](https://www.dell.com/support/home/ie/en/iedhs1/product-support/product/xps-15-9560-laptop/drivers))
 
 
 **Fixes:**
-* **Services**: Disabling this service in **services.msc** avoids the issue completely.
+* ~~**Services**: Disabling this service in **services.msc** avoids the issue completely.~~
+  * Something re-enables the service after some weeks. [Instead, uninstall the software completely.](#0-update) 
 * **Lower Priority:** no effect at all (see "ring -2" concept, below)
 
 
@@ -94,7 +103,6 @@ The service "Dell SupportAssist" causes SECONDS of latency every 30 minutes (XPS
 * 2020-02-27 11:38:44,490156400+01:00 1582799924.490156400 SMI 42
 
 
-
 ## Tickets
 
 * [Dell Ticket](https://www.dell.com/community/XPS/Dell-SupportAssist-causes-SECONDS-of-latency-every-30m-XPS-15/m-p/7501047)
@@ -102,6 +110,7 @@ The service "Dell SupportAssist" causes SECONDS of latency every 30 minutes (XPS
 * [9560 owners thread](http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303/)
 * [9570 owners thread](http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292)
 * [reddit](https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/)
+
 
 
 ------------------------
