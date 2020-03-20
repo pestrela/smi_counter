@@ -60,5 +60,5 @@ with some configuration you can get this to only ~300 events per second (=1M per
 
 Configuration export: [ProcmonConfiguration.pmc](ProcmonConfiguration.pmc)
 
-!light_monitor![light_monitor.jpg?raw=true]
+!light_monitor![light_monitor.jpg?raw=true "light_monitor.jpg"]
 
