@@ -55,9 +55,14 @@ c) To measure SMI LATENCY impact:
   - Run IDTL (In Depth Latency Tests) with HIGH_LEVEL IRQL
   - https://www.resplendence.com/latencymon_idlt
   - https://www.resplendence.com/latencymon_cpustalls
-  - Windows performance analyser tutorial:  https://www.sysnative.com/forums/threads/how-to-diagnose-and-fix-high-dpc-latency-issues-with-wpa-windows-vista-7-8.5721/ 
+  
+  
+c2) To use Windows Performance Analyser (WPR/WPA) and the Event Tracing for Windows (ETW):
+  - Tutorial1: https://superuser.com/questions/527401/troubleshoot-high-cpu-usage-by-the-system-process
     - if you get error 0x80071069: get more free disk space
- 
+  - Driver verifier info: https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/driver-verifier?redirectedfrom=MSDN#how_to_control_dv  
+  - tutorial2: https://www.sysnative.com/forums/threads/how-to-diagnose-and-fix-high-dpc-latency-issues-with-wpa-windows-vista-7-8.5721/ 
+  
  
 d) About the Intel register that counts SMIs:
   - MSR register info:
@@ -80,7 +85,7 @@ e) Disabling windows Telemetry
    - microsoft: https://www.itechtics.com/enable-gpedit-windows-10-home/  / powershell script / then gpedit.msc 
    - open source: https://github.com/Fleex255/PolicyPlus#download
    
- 
+   
 e) How to find the BIOS update history in Dell:
   - Dell update logs: C:\ProgramData\Dell\UpdateService\Log  
   - Activity.log:
@@ -91,7 +96,7 @@ e) How to find the BIOS update history in Dell:
     - cat Service.log | grep -i installing
 
     
-f) How to find the Dell Supportassist log:
+f) How to find the Dell Support Assist log:
   - log: C:\ProgramData\Dell\SARemediation\log
   - cat DellSupportAssistRemedationService.log | egrep -i '\*process|audio'
     - this service makes a full PCI inventory every 30minutes (!)
@@ -100,6 +105,10 @@ f) How to find the Dell Supportassist log:
     - 9560 owners thread:  http://forum.notebookreview.com/threads/xps-15-9560-owners-thread.800611/page-452#post-10988303
     - 9570 owners thread: http://forum.notebookreview.com/threads/xps-15-9570-owners-thread.817008/page-292
     - reddit: https://www.reddit.com/r/Dell/comments/ey06bu/dell_xps_15_9560_bios_smi_problems_seconds_of_smi/
+    
+    
+g) Using the WPA     
+    
 "
 
 }

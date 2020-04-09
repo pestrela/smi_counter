@@ -43,7 +43,7 @@ with some configuration you can get this to only ~300 events per second (=1M per
 ### Capture:
 * CTRL+E: Start capturing
   * very important: confirm that you are getting about ~300 events per second.
-  * if you are getting more
+  * if you are getting more, check the filtering again
 * Run a CPU-heavy for some seconds for testing purposes:  
   * ie: powerMAX, cpu-z benchmark tab, etc 
 * CTRL+E: Stop capturing
@@ -61,4 +61,5 @@ with some configuration you can get this to only ~300 events per second (=1M per
 Configuration export: [ProcmonConfiguration.pmc](ProcmonConfiguration.pmc)
 
 ![light_monitor](light_monitor.jpg?raw=true "light_monitor.jpg")!
+
 

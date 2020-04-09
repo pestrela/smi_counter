@@ -33,8 +33,9 @@ https://en.wikipedia.org/wiki/System_Management_Mode
   * https://www.resplendence.com/latencymon_idlt
   * https://www.resplendence.com/latencymon_cpustalls
    
-Note: run "windows_count_smi.sh -H" for more help text and links.
-   
+Note1: run "windows_count_smi.sh -H" for more help text, tutorials and links.   
+Note2: some advanced analysis requires WPR/WPA/ETW. [This](https://superuser.com/questions/527401/troubleshoot-high-cpu-usage-by-the-system-process) is the best tutorial I've seen, including A LOT of examples 
+
 # Results
 
 ## Example of an audio glitch
