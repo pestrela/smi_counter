@@ -18,7 +18,7 @@ https://en.wikipedia.org/wiki/System_Management_Mode
 ## Download
 
 You can run this tool with or without WSL.\
-The WSL version is recommended because it offers much more features.
+The WSL version is recommended because it offers much more features.\
 The non-WSL version is very simple for manual use.
 
 * WSL version: [windows_count_smi.sh](windows_count_smi.sh)
@@ -28,9 +28,6 @@ The non-WSL version is very simple for manual use.
 ## Pre-requisites:
 
 * Windows 10
-* WSL (Windows subsystem for linux)
-  * https://docs.microsoft.com/en-us/windows/wsl/install-win10
-  * see below for a non-wsl version 
 
 ## Installation
 
@@ -51,10 +48,9 @@ The non-WSL version is very simple for manual use.
 
 ![smi_counter_non_wsl_version](smi_counter_non_wsl_version.jpg?raw=true )
 
-
- smi_counter_non_wsl_version.jpg
 ## Operation (WSL version)
 
+1. Install WSL (guide)[https://docs.microsoft.com/en-us/windows/wsl/install-win10]
 1. start WSL window in administrator mode
 1. run "windows_count_smi.sh"
 1. To measure SMI LATENCY impact:
