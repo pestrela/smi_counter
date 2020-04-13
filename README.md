@@ -1,40 +1,71 @@
 # Windows SMI counter
 
-This is a wrapper for the Kernel Debugger to count SMI interrupts.\
-SMIs are special interrupts issued by the BIOS at any time todo special operations. This locks the whole computer including all cores and the whole OS.
+**This is a wrapper for the Kernel Debugger to count SMI interrupts in Windows 10.**
+
+SMIs are special interrupts issued to the BIOS to perform special low-level operations.\
+These events lock the whole computer - including all cores and the whole Operating System.
+
+SMIs can happen at any time and are completely invisible to the OS *except* for a special CPU register.\
+Because they are hidden, this confuses tools like LatencyMon/DPClatency which will put the blame in random drivers instead.
+
+In linux the special register can be read with "sudo turbostat --msr 0x34".\
+In windows 10 you will have to install the microsoft debugging SDK and enable the debug boot flag.
+
+more info:
 https://en.wikipedia.org/wiki/System_Management_Mode
 
+   
 ## Download
 
-[windows_count_smi.sh](windows_count_smi.sh)
+You can run this tool with or without WSL.\
+The WSL version is recommended because it offers much more features.
+The non-WSL version is very simple for manual use.
+
+* WSL version: [windows_count_smi.sh](windows_count_smi.sh)
+* non-WSL version: [windows_count_smi.cmd](windows_count_smi.cmd)
 
 
 ## Pre-requisites:
 
 * Windows 10
-* WSL
-* Windows Kernel Debugger:
-   * install windows SDK, select ONLY 'Debugging Tools for Windows'
-   * https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
+* WSL (Windows subsystem for linux)
+  * https://docs.microsoft.com/en-us/windows/wsl/install-win10
+  * see below for a non-wsl version 
 
 ## Installation
 
-* Disable secure boot in BIOS
-* Enable debug in windows kernel  (bcdedit.exe -debug on)
-  * https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
-* Reboot
-  
-## Operation
+1. Install the microsoft "windows kernel debugger" program:
+   * install windows SDK, select ONLY 'Debugging Tools for Windows'
+   * https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
 
-* start WSL window in administrator mode
-* windows_count_smi.sh [test_descrption]
-* To measure SMI LATENCY impact:
+1. Disable secure boot in BIOS
+1. Enable debug in windows kernel  (bcdedit.exe -debug on)
+  * https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
+1. Reboot
+
+## Operation (NON-WSL version)
+
+
+1. start a regular CMD window in Administrator mode
+1. run "windows_count_smi.cmd"
+
+![smi_counter_non_wsl_version](smi_counter_non_wsl_version.jpg?raw=true )
+
+
+ smi_counter_non_wsl_version.jpg
+## Operation (WSL version)
+
+1. start WSL window in administrator mode
+1. run "windows_count_smi.sh"
+1. To measure SMI LATENCY impact:
   * Run IDTL (In Depth Latency Tests) with HIGH_LEVEL IRQL
   * https://www.resplendence.com/latencymon_idlt
   * https://www.resplendence.com/latencymon_cpustalls
    
-Note1: run "windows_count_smi.sh -H" for more help text, tutorials and links.   
+Note1: run "windows_count_smi.sh -H" for more help text, tutorials and links. [link](https://github.com/pestrela/smi_counter/blob/master/windows_count_smi.sh)
 Note2: some advanced analysis requires WPR/WPA/ETW. [This](https://superuser.com/questions/527401/troubleshoot-high-cpu-usage-by-the-system-process) is the best tutorial I've seen, including A LOT of examples 
+
+![smi_counter_wsl_version](smi_counter_wsl_version.jpg?raw=true )
 
 # Results
 
