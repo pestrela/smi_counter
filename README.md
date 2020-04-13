@@ -32,12 +32,12 @@ The non-WSL version is very simple for manual use.
 ## Installation
 
 1. Install the microsoft "windows kernel debugger" program:
- * install windows SDK, select ONLY 'Debugging Tools for Windows'
- * https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
+  * install windows SDK, select ONLY 'Debugging Tools for Windows'
+  * https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
 
 1. Disable secure boot in BIOS
 1. Enable debug in windows kernel  (bcdedit.exe -debug on)
- * https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
+  * https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
 1. Reboot
 
 ## Operation (NON-WSL version)
