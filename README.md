@@ -34,7 +34,6 @@ The non-WSL version is very simple for manual use.
 1. Install the microsoft "windows kernel debugger" program:
    * install windows SDK, select ONLY 'Debugging Tools for Windows'
    * https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/
-
 1. Disable secure boot in BIOS
 1. Enable debug in windows kernel  (bcdedit.exe -debug on)
    * https://alfredmyers.com/2017/11/26/the-system-does-not-support-local-kernel-debugging/
@@ -58,7 +57,7 @@ The non-WSL version is very simple for manual use.
    * https://www.resplendence.com/latencymon_idlt
    * https://www.resplendence.com/latencymon_cpustalls
    
-Note1: run "windows_count_smi.sh -H" for more help text, tutorials and links. [link](https://github.com/pestrela/smi_counter/blob/master/windows_count_smi.sh)
+Note1: run "windows_count_smi.sh -H" for more help text, tutorials and links. [link](https://github.com/pestrela/smi_counter/blob/master/windows_count_smi.sh) \
 Note2: some advanced analysis requires WPR/WPA/ETW. [This](https://superuser.com/questions/527401/troubleshoot-high-cpu-usage-by-the-system-process) is the best tutorial I've seen, including A LOT of examples 
 
 ![smi_counter_wsl_version](smi_counter_wsl_version.jpg?raw=true )
