@@ -66,7 +66,7 @@ Note2: some advanced analysis requires WPR/WPA/ETW. [This](https://superuser.com
 
 ## Example of an audio glitch
 
-here: [example_audio_glitch.mp3](example_audio_glitch.mp3) / [alternative link](https://www.dropbox.com/s/16fa74u45qw846y/example_audio_glitch.mp3?dl=0)
+here: [example_audio_glitch.mp3](pics/example_audio_glitch.mp3) / [alternative link](https://www.dropbox.com/s/16fa74u45qw846y/example_audio_glitch.mp3?dl=0)
 
 ## 0) UPDATE
 
